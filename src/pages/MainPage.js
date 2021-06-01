@@ -43,11 +43,11 @@ const MainPage = () => {
                 key={errand.id}
                 title={errand.title}
                 description={errand.description}
-                // location={}
-                // compensation={}
-                // dateDue={}
-                // timeDue={}
-                // category={}
+                location={errand.location}
+                compensation={errand.compensation}
+                dateDue={errand.dateDue}
+                timeDue={errand.timeDue}
+                category={errand.category}
                 image={errand.image}
               />
             );
