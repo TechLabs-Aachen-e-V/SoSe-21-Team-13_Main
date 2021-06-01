@@ -4,10 +4,10 @@ import logo from '../../images/helpify_logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-light bg-light">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          <img src={logo} alt="" width="45" className="d-inline-block align-text-center" />
+    <nav className='navbar navbar-light bg-light'>
+      <div className='container-fluid'>
+        <Link className='navbar-brand' to='/'>
+          <img src={logo} alt='' width='45' className='d-inline-block align-text-center' />
           Helpify
         </Link>
         <div>

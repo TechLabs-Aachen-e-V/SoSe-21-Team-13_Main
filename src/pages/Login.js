@@ -7,25 +7,25 @@ const Login = () => {
     <Fragment>
       <Navbar />
       <form className='container col-md-7 col-lg-6 col-xl-5 col-xxl-4 mt-5'>
-        <img className="mb-4 text-center d-block mx-auto" src={logo} alt="" width="200" />
-        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+        <img className='mb-4 text-center d-block mx-auto' src={logo} alt='' width='200' />
+        <h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
 
-        <div className="form-floating">
-          <input type="email" className="form-control mb-2" id="email" placeholder="name@example.com" />
-          <label htmlFor="email">Email address</label>
+        <div className='form-floating'>
+          <input type='email' className='form-control mb-2' id='email' placeholder='name@example.com' />
+          <label htmlFor='email'>Email address</label>
         </div>
-        <div className="form-floating">
-          <input type="password" className="form-control mb-2" id="password" placeholder="Password" />
-          <label htmlFor="password">Password</label>
+        <div className='form-floating'>
+          <input type='password' className='form-control mb-2' id='password' placeholder='Password' />
+          <label htmlFor='password'>Password</label>
         </div>
 
-        <div className="checkbox mb-3">
+        <div className='checkbox mb-3'>
           <label>
-            <input type="checkbox" value="remember-me" /> Remember me
+            <input type='checkbox' value='remember-me' /> Remember me
           </label>
         </div>
-        <button className="w-100 btn btn-lg btn-dark" type="submit">Sign in</button>
-        <p className="mt-5 mb-3 text-muted text-center">© 2021</p>
+        <button className='w-100 btn btn-lg btn-dark' type='submit'>Sign in</button>
+        <p className='mt-5 mb-3 text-muted text-center'>© 2021</p>
       </form>
     </Fragment>
   );
