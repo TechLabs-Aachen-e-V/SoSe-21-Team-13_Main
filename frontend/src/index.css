@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+  margin: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-dark {
+  background-color: #5c8bc2;
+  border-color: #5c8bc2;
+}
+
+.btn-dark:hover {
+  background-color: #2b72c4;
+  border-color: #2b72c4;
+}
+
+.card-img {
+  max-width: 300px;
+}
