@@ -91,10 +91,27 @@ app.get('/errands', async (req, res) => {
   res.json(errands)
 })
 
-app.post('/errands', (req, res) => {
-  const errand = req.body;
-  //no error handling here !!
-  Errand.insertMany([errand]);
+app.post('/errands', async (req, res) => {
+
+  try {
+    const newErrand = new Errand({
+      title: req.body.title,
+      description: req.body.description,
+      location: req.body.location,
+      compensation: req.body.compensation,
+      dateDue: req.body.dateDue,
+      timeDue: req.body.timeDue,
+      category: req.body.category,
+      imageUrl: req.body.image
+    })
+  
+    //insert error handling here !!
+    const errand = await newErrand.save()
+    res.json(errand)
+
+  } catch (error) {
+    res.send('Failed to create new errand')
+  }
 })
 
 
