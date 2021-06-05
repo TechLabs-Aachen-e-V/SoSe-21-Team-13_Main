@@ -93,7 +93,8 @@ app.get('/errands', async (req, res) => {
 
 app.post('/errands', (req, res) => {
   const errand = req.body;
-  console.dir(errand)
+  //no error handling here !!
+  Errand.insertMany([errand]);
 })
 
 

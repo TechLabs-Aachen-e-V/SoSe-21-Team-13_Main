@@ -17,7 +17,7 @@ const NewErrandForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    
+
     const enteredTitle = titleInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
     const enteredLocation = locationInputRef.current.value;
@@ -48,7 +48,7 @@ const NewErrandForm = () => {
         }
       }
     );
- 
+
     history.replace('/');
   };
 
@@ -62,7 +62,7 @@ const NewErrandForm = () => {
         </div>
         <div className='form-group pt-2'>
           <label htmlFor='errand-description' >Description</label>
-          <textarea className='form-control' id='errand-description' rows='3' placeholder='Looking for a dog lover to walk my puppy 🐶' ref={descriptionInputRef} required></textarea> 
+          <textarea className='form-control' id='errand-description' rows='3' placeholder='Looking for a dog lover to walk my puppy 🐶' ref={descriptionInputRef} required></textarea>
         </div>
         <div className='form-group pt-2'>
           <label htmlFor='errand-location'>Errand location</label>
