@@ -7,8 +7,9 @@ const port = 3000
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
+app.use(express.json());
 
-mongoose.connect('mongodb://helpify:techlabs@cluster0-shard-00-00.g9aoz.mongodb.net:27017,cluster0-shard-00-01.g9aoz.mongodb.net:27017,cluster0-shard-00-02.g9aoz.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-111l0b-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost:27017/helpify', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connection open');
   })
@@ -46,32 +47,56 @@ const errandSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  location: {
+    type: String
+  },
   compensation: {
     type: Number,
     required: true
   },
-  date: {
+  datePosted: {
     type: Date,
     default: Date.now
+  },
+  dateDue: {
+    type: String,
+    required: true
+  },
+  timeDue: {
+    type: String,
+  },
+  category: {
+    type: String,
+  },
+  imageUrl: {
+    type: String,
+  },
+  errandStatus: {
+    type: Boolean,
   }
 })
 const Errand = mongoose.model('Errand', errandSchema)
 
 // Errand.insertMany([
-//   {title: 'Laundry', description: 'Please do my laundry', compensation: 5},
-//   {title: 'Dog Walk', description: 'Please walk my dog', compensation: 4},
-//   {title: 'Pick up package', description: 'Please pick up my package', compensation: 10},
-//   {title: 'Grocery shopping', description: 'Please do grocery shopping for me. List...', compensation: 5},
+//   {
+//     title: 'Grocery shopping', description: 'Please do grocery shopping for me. List...', compensation: 5,
+//     location: 'Aachen', dateDue: '06.10.21', timeDue: '4pm', category: 'grocery', imageUrl: '', errandStatus: true
+//   },
 // ])
 
 
-app.get('/', async (req, res) => { 
+app.get('/errands', async (req, res) => {
   const errands = await Errand.find()
   console.log(errands)
-
-  res.render('errands', {errands: errands})
+  res.json(errands)
 })
- 
+
+app.post('/errands', (req, res) => {
+  const errand = req.body;
+  console.dir(errand)
+})
+
+
 app.get('/login', (req, res) => {
   res.render('login')
 })
@@ -79,7 +104,7 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.send('Signup page')
 })
-  
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
