@@ -3,7 +3,7 @@ const express = require('express')
 const ejs = require('ejs');
 const path = require('path');
 const app = express()
-const port = 3000
+const port = 5000
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
