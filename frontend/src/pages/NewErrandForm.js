@@ -39,7 +39,7 @@ const NewErrandForm = () => {
     };
 
     await fetch(
-      'https://helpify-446a2-default-rtdb.europe-west1.firebasedatabase.app/errands.json',
+      '/errands',
       {
         method: 'POST',
         body: JSON.stringify(errandData),
