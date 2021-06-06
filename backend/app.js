@@ -1,13 +1,9 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
-const ejs = require('ejs');
-const path = require('path');
 const app = express()
 const port = 5000
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -117,7 +113,7 @@ app.post('/errands', async (req, res) => {
 
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.send('login')
 })
 
 app.get('/signup', (req, res) => {
