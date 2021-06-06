@@ -9,17 +9,24 @@ const MainPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://helpify-446a2-default-rtdb.europe-west1.firebasedatabase.app/errands.json')
+    fetch('/errands')
       .then(response => response.json())
       .then(data => {
         setIsLoading(false);
 
         const errands = [];
 
-        for (const key in data) {
+        for (const item of data) {
           const errand = {
-            id: key,
-            ...data[key]
+            id: item._id,
+            title: item.title,
+            description: item.description,
+            location: item.location,
+            compensation: item.compensation,
+            dateDue: item.dateDue,
+            timeDue: item.timeDue,
+            category: item.category,
+            image: item.imageUrl
           };
 
           errands.push(errand);
