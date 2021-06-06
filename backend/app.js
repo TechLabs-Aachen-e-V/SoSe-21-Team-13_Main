@@ -84,7 +84,6 @@ const Errand = mongoose.model('Errand', errandSchema)
 
 app.get('/errands', async (req, res) => {
   const errands = await Errand.find()
-  console.log(errands)
   res.json(errands)
 })
 
