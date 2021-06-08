@@ -18,24 +18,15 @@ const NewErrandForm = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    const enteredTitle = titleInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
-    const enteredLocation = locationInputRef.current.value;
-    const enteredCompensation = compensationInputRef.current.value;
-    const enteredDateDue = dateDueInputRef.current.value;
-    const enteredTimeDue = timeDueInputRef.current.value;
-    const enteredCategory = categoryInputRef.current.value;
-    const enteredImage = imageInputRef.current.value;
-
     const errandData = {
-      title: enteredTitle,
-      description: enteredDescription,
-      location: enteredLocation,
-      compensation: enteredCompensation,
-      dateDue: enteredDateDue,
-      timeDue: enteredTimeDue,
-      category: enteredCategory,
-      image: enteredImage
+      title: titleInputRef.current.value,
+      description: descriptionInputRef.current.value,
+      location: locationInputRef.current.value,
+      compensation: compensationInputRef.current.value,
+      dateDue: dateDueInputRef.current.value,
+      timeDue: timeDueInputRef.current.value,
+      category: categoryInputRef.current.value,
+      image: imageInputRef.current.value
     };
 
     await fetch(
