@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import logo from '../images/helpify_logo.png';
-import Navbar from '../components/UI/Navbar';
 
 const Login = () => {
   return (
     <Fragment>
-      <Navbar />
       <form className='container col-md-7 col-lg-6 col-xl-5 col-xxl-4 mt-5'>
         <img className='mb-4 text-center d-block mx-auto' src={logo} alt='' width='200' />
         <h1 className='h3 mb-3 fw-normal'>Please sign in</h1>

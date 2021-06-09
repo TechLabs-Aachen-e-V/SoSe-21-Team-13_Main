@@ -1,6 +1,5 @@
 import React, { Fragment, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import Navbar from '../components/UI/Navbar';
 
 const NewErrandForm = () => {
 
@@ -17,7 +16,7 @@ const NewErrandForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
+    
     const errandData = {
       title: titleInputRef.current.value,
       description: descriptionInputRef.current.value,
@@ -26,7 +25,7 @@ const NewErrandForm = () => {
       dateDue: dateDueInputRef.current.value,
       timeDue: timeDueInputRef.current.value,
       category: categoryInputRef.current.value,
-      image: imageInputRef.current.value
+      imageUrl: imageInputRef.current.value
     };
 
     await fetch(
@@ -45,7 +44,6 @@ const NewErrandForm = () => {
 
   return (
     <Fragment>
-      <Navbar />
       <form className='col-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4 mx-auto pt-5' onSubmit={submitHandler} >
         <div className='form-group'>
           <label htmlFor='errand-title'>Errand title</label>

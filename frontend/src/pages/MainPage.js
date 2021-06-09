@@ -1,53 +1,19 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
-import Navbar from '../components/UI/Navbar';
+import useFetchGet from '../hooks/useFetchGet';
 
 const MainPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedErrands, setLoadedErrands] = useState([]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch('/errands')
-      .then(response => response.json())
-      .then(data => {
-        setIsLoading(false);
-
-        const errands = [];
-
-        for (const item of data) {
-          const errand = {
-            id: item._id,
-            title: item.title,
-            description: item.description,
-            location: item.location,
-            compensation: item.compensation,
-            dateDue: item.dateDue,
-            timeDue: item.timeDue,
-            category: item.category,
-            image: item.imageUrl
-          };
-
-          errands.push(errand);
-        }
-
-        setLoadedErrands(errands);
-      });
-  }, []);
-
-  console.log(loadedErrands);
-
+  const [ isLoading, data ] = useFetchGet('/errands');
 
   return (
     <Fragment>
-      <Navbar />
       {!isLoading ? (
         <ul>
-          {loadedErrands.map(errand => {
+          {data.map(errand => {
             return (
               <ErrandCard
-                key={errand.id}
+                key={errand._id}
                 title={errand.title}
                 description={errand.description}
                 location={errand.location}
@@ -55,7 +21,7 @@ const MainPage = () => {
                 dateDue={errand.dateDue}
                 timeDue={errand.timeDue}
                 category={errand.category}
-                image={errand.image}
+                image={errand.imageUrl}
               />
             );
           })}

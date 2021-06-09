@@ -90,16 +90,7 @@ app.get('/errands', async (req, res) => {
 app.post('/errands', async (req, res) => {
 
   try {
-    const newErrand = new Errand({
-      title: req.body.title,
-      description: req.body.description,
-      location: req.body.location,
-      compensation: req.body.compensation,
-      dateDue: req.body.dateDue,
-      timeDue: req.body.timeDue,
-      category: req.body.category,
-      imageUrl: req.body.image
-    })
+    const newErrand = new Errand(req.body)
   
     //insert error handling here !!
     const errand = await newErrand.save()
