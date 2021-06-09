@@ -1,25 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
-
-function useFetch(url) {
-  const [isLoading, setIsLoading] = useState(true); 
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setIsLoading(false);
-        setData(data);
-      });
-  }, []);
-  return [ isLoading, data ];
-}
+import useFetchGet from '../hooks/useFetchGet';
 
 const MainPage = () => {
-  const [ isLoading, data ] = useFetch('/errands');
+  const [ isLoading, data ] = useFetchGet('/errands');
 
   return (
     <Fragment>
