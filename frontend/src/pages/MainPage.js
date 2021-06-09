@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
-import Navbar from '../components/UI/Navbar';
 
 function useFetch(url) {
   const [isLoading, setIsLoading] = useState(true); 
@@ -22,10 +21,8 @@ function useFetch(url) {
 const MainPage = () => {
   const [ isLoading, data ] = useFetch('/errands');
 
-
   return (
     <Fragment>
-      <Navbar />
       {!isLoading ? (
         <ul>
           {data.map(errand => {
