@@ -17,7 +17,7 @@ const NewErrandForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
+    
     const errandData = {
       title: titleInputRef.current.value,
       description: descriptionInputRef.current.value,
