@@ -14,72 +14,9 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTop
     console.log("Error: ", err);
   })
 
-const userSchema = new mongoose.Schema({
-  first: {
-    type: String,
-    required: true
-  },
-  last: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-})
-const User = mongoose.model('User', userSchema)
-
-// User.insertMany([
-//   {first: "Jon", last: "K", password: "12345"},
-//   {first: "Konstantin", last:"Wehmeyer", password: "54321"}
-// ])
-
-const errandSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  location: {
-    type: String
-  },
-  compensation: {
-    type: Number,
-    required: true
-  },
-  datePosted: {
-    type: Date,
-    default: Date.now
-  },
-  dateDue: {
-    type: String,
-    required: true
-  },
-  timeDue: {
-    type: String,
-  },
-  category: {
-    type: String,
-  },
-  imageUrl: {
-    type: String,
-  },
-  errandStatus: {
-    type: Boolean,
-  }
-})
-const Errand = mongoose.model('Errand', errandSchema)
-
-// Errand.insertMany([
-//   {
-//     title: 'Grocery shopping', description: 'Please do grocery shopping for me. List...', compensation: 5,
-//     location: 'Aachen', dateDue: '06.10.21', timeDue: '4pm', category: 'grocery', imageUrl: '', errandStatus: true
-//   },
-// ])
+// import models from ./models
+// const User = require('./models/user');
+const Errand = require('./models/errand');
 
 
 app.get('/errands', async (req, res) => {
@@ -91,7 +28,7 @@ app.post('/errands', async (req, res) => {
 
   try {
     const newErrand = new Errand(req.body)
-  
+
     //insert error handling here !!
     const errand = await newErrand.save()
     res.json(errand)
