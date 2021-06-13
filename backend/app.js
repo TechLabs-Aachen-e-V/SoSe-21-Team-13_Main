@@ -5,6 +5,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const session = require('express-session')
 const flash = require('connect-flash')
+const jwt = require('jsonwebtoken')
 const User = require('./models/user')
 const { signupValidation, loginValidation } = require('./validation')
 const app = express()
@@ -80,7 +81,7 @@ app.post('/signup', async (req, res) => {
       username: req.body.username
     })
     const newUser = await User.register(user, req.body.password)
-    console.log(newUser);
+
   } catch (error) {
     res.status(400).send(error.message)
   }
@@ -88,19 +89,11 @@ app.post('/signup', async (req, res) => {
 
 
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/errands',
-  failureRedirect: '/login',
-  failureFlash: true
+  session: false
 }), (req, res) => {
-  try {
-    const { error } = loginValidation(req.body)
-    if (error) return res.status(400).send(error.details[0].message)
-
-    res.send('Logged in')
-
-  } catch (error) {
-    res.status(400).send(error.message)
-  }
+  // Token
+  const token = jwt.sign({ id: req.user._id }, 'jwt_secret')
+  res.json({ token: token })
 })
 
 

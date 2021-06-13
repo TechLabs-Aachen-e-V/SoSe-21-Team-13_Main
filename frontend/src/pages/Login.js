@@ -17,7 +17,7 @@ const Login = () => {
         password
       };
 
-      await fetch(
+      const response = await fetch(
         '/login',
         {
           method: 'POST',
@@ -28,8 +28,10 @@ const Login = () => {
         }
       );
 
-      console.log('logged in');
-      history.replace('/');
+      const data = await response.json();
+      console.log(data.token);
+
+      // console.log('logged in');
     } catch (error) {
       console.log(error);
     }
