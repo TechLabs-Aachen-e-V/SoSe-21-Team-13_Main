@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const User = require('./models/user')
 const { signupValidation } = require('./validation')
+const bcrypt = require('bcrypt')
 const app = express()
 const port = 5000
 
@@ -54,17 +55,20 @@ app.post('/signup', async (req, res) => {
     const emailExists = await User.findOne({ email: req.body.email })
     if(emailExists) return res.status(400).send('Email already exists')
 
+    //Hash password
+    hashedPassword = await bcrypt.hash(req.body.password, 10)
+
     //Create a new user
     const user = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      hashedPassword: req.body.password
+      hashedPassword: hashedPassword
     })
 
     //Save the user
     const savedUser = await user.save()
-    res.send(savedUser)
+    res.send({ user: user._id })
 
   } catch (error) {
     res.status(400).send(error.message)
