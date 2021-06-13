@@ -2,6 +2,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const User = require('./models/user')
+const { signupValidation } = require('./validation')
 const app = express()
 const port = 5000
 
@@ -44,8 +45,16 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', async (req, res) => {
-  
+
   try {
+    const { error } = signupValidation(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
+    //Check if user exists
+    const emailExists = await User.findOne({ email: req.body.email })
+    if(emailExists) return res.status(400).send('Email already exists')
+
+    //Create a new user
     const user = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -53,6 +62,7 @@ app.post('/signup', async (req, res) => {
       hashedPassword: req.body.password
     })
 
+    //Save the user
     const savedUser = await user.save()
     res.send(savedUser)
 
