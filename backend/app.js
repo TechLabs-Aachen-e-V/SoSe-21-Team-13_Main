@@ -2,7 +2,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const User = require('./models/user')
-const { signupValidation } = require('./validation')
+const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
 const app = express()
 const port = 5000
@@ -77,6 +77,27 @@ app.post('/signup', async (req, res) => {
 
 app.get('/login', (req, res) => {
   res.send('login')
+})
+
+app.post('/login', async (req, res) => {
+  try {
+    const { error } = loginValidation(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
+    //Check if user exists
+    const user = await User.findOne({ email: req.body.email })
+    if(!user) return res.status(400).send('Email or password is invalid')
+
+    //Verify password
+    const isValidPassword = await bcrypt.compare(req.body.password, user.hashedPassword);
+
+    if(!isValidPassword) return res.send('Email or password is invalid')
+
+    res.send('Logged in')
+
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
 })
 
 
