@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     hashedPassword: {
-        tpye: String,
+        type: String,
         required: [true, 'Password cannot be blank']
     },
     avatarUrl: String

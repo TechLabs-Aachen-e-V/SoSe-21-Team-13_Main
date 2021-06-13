@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
+const User = require('./models/user')
 const app = express()
 const port = 5000
 
@@ -38,14 +39,32 @@ app.post('/errands', async (req, res) => {
   }
 })
 
+app.get('/signup', (req, res) => {
+  res.send('Signup page')
+})
+
+app.post('/signup', async (req, res) => {
+  
+  try {
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      hashedPassword: req.body.password
+    })
+
+    const savedUser = await user.save()
+    res.send(savedUser)
+
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
 
 app.get('/login', (req, res) => {
   res.send('login')
 })
 
-app.get('/signup', (req, res) => {
-  res.send('Signup page')
-})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
