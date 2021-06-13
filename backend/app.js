@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const session = require('express-session')
-
+const flash = require('connect-flash')
 const User = require('./models/user')
 const { signupValidation, loginValidation } = require('./validation')
 const app = express()
@@ -23,6 +23,7 @@ const sessionConfig = {
 
 app.use(express.json());
 app.use(session(sessionConfig));
+app.use(flash());
 
 // Auth with passport
 app.use(passport.initialize());
@@ -86,19 +87,14 @@ app.post('/signup', async (req, res) => {
 })
 
 
-app.post('/login', async (req, res) => {
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/errands',
+  failureRedirect: '/login',
+  failureFlash: true
+}), (req, res) => {
   try {
     const { error } = loginValidation(req.body)
     if (error) return res.status(400).send(error.details[0].message)
-
-    //Check if user exists
-    const user = await User.findOne({ email: req.body.email })
-    if (!user) return res.status(400).send('Email or password is invalid')
-
-    //Verify password
-    const isValidPassword = await bcrypt.compare(req.body.password, user.hashedPassword);
-
-    if (!isValidPassword) return res.send('Email or password is invalid')
 
     res.send('Logged in')
 
