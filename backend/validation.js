@@ -7,26 +7,21 @@ const signupValidation = (data) => {
       .alphanum()
       .min(3)
       .max(30),
-
+  
     lastName: Joi.string()
       .alphanum()
       .min(3)
       .max(30),
-
+  
     email: Joi.string()
       .email({
         minDomainSegments: 2
       })
       .required(),
-
+  
     password: Joi.string()
       .min(6)
-      .required(),
-
-    username: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(30),
+      .required()
   })
 
   return schema.validate(data)
@@ -35,14 +30,15 @@ const signupValidation = (data) => {
 //Login validation
 const loginValidation = (data) => {
   const schema = Joi.object({
-    username: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(30),
+    email: Joi.string()
+    .email({
+      minDomainSegments: 2
+    })
+    .required(),
 
-    password: Joi.string()
-      .min(6)
-      .required()
+  password: Joi.string()
+    .min(6)
+    .required()
   })
 
   return schema.validate(data)
