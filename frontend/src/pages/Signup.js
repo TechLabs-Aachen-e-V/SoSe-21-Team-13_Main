@@ -4,6 +4,7 @@ import logo from '../images/helpify_logo.png';
 
 const Signup = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [error, setError] = useState();
   const history = useHistory();
 
   const submitHandler = async (event) => {
@@ -12,7 +13,6 @@ const Signup = () => {
     const firstName = event.target['firstName'].value;
     const lastName = event.target['lastName'].value;
     const email = event.target['email'].value;
-    const username = event.target['username'].value;
     const password = event.target['password'].value;
     const passwordConfirm = event.target['passwordConfirm'].value;
 
@@ -29,11 +29,10 @@ const Signup = () => {
         firstName,
         lastName,
         email,
-        username,
         password
       };
 
-      await fetch(
+      const res = await fetch(
         '/signup',
         {
           method: 'POST',
@@ -44,7 +43,15 @@ const Signup = () => {
         }
       );
 
-      history.replace('/');
+      const data = await res.json();
+      console.log(data);
+      if(!data.error) return history.replace('/');
+      
+      setError(data.error);
+      return setTimeout(() => {
+        setError();
+      }, 3000);
+
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +66,10 @@ const Signup = () => {
           <div className='alert alert-warning' role='alert'>
             Passwords do not match.
           </div>
+        )}{error && (
+          <div className='alert alert-warning' role='alert'>
+            {error}
+          </div>
         )}
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
         <div className='form-floating'>
@@ -68,10 +79,6 @@ const Signup = () => {
         <div className='form-floating'>
           <input type='text' className='form-control mb-2' id='lastName' placeholder='Cena' required />
           <label htmlFor='lastName'>Last name</label>
-        </div>
-        <div className='form-floating'>
-          <input type='text' className='form-control mb-2' id='username' placeholder='johncena' required />
-          <label htmlFor='username'>Username</label>
         </div>
         <div className='form-floating'>
           <input type='email' className='form-control mb-2' id='email' placeholder='name@example.com' />
