@@ -5,6 +5,7 @@ import logo from '../images/helpify_logo.png';
 const Signup = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [error, setError] = useState();
+  const [userId, setUserId] = useState();
   const history = useHistory();
 
   const submitHandler = async (event) => {
@@ -45,7 +46,10 @@ const Signup = () => {
 
       const data = await res.json();
       console.log(data);
-      if(!data.error) return history.replace('/');
+      if(!data.error) {
+        setUserId(data);
+        return history.replace('/');
+      }
       
       setError(data.error);
       return setTimeout(() => {

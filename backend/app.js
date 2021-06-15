@@ -53,7 +53,7 @@ app.post('/signup', async (req, res) => {
 
     //Check if user exists
     const emailExists = await User.findOne({ email: req.body.email })
-    if(emailExists) return res.status(400).send('Email already exists')
+    if(emailExists) return res.status(400).json({error: 'Email already exists'})
 
     //Hash password
     hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -68,10 +68,10 @@ app.post('/signup', async (req, res) => {
 
     //Save the user
     const savedUser = await user.save()
-    res.send({ user: user._id })
+    res.json({ userId: user._id })
 
   } catch (error) {
-    res.status(400).send(error.message)
+    res.status(400).json({error: error.message})
   }
 })
 
@@ -82,21 +82,21 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
   try {
     const { error } = loginValidation(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).json({error: error.details[0].message})
 
     //Check if user exists
     const user = await User.findOne({ email: req.body.email })
-    if(!user) return res.status(400).send('Email or password is invalid')
+    if(!user) return res.status(400).json({error: 'Email or password is invalid'})
 
     //Verify password
     const isValidPassword = await bcrypt.compare(req.body.password, user.hashedPassword);
 
-    if(!isValidPassword) return res.send('Email or password is invalid')
+    if(!isValidPassword) return res.json({error: 'Email or password is invalid'})
 
-    res.send('Logged in')
+    res.json({ userId: user._id })
 
   } catch (error) {
-    res.status(400).send(error.message)
+    res.status(400).json({error: error.message})
   }
 })
 
