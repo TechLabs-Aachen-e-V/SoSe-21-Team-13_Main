@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
+const session = require('express-session')
 const User = require('./models/user')
 const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
@@ -8,6 +9,11 @@ const app = express()
 const port = 5000
 
 app.use(express.json());
+app.use(session({
+  secret: "ChangeInProduction",
+  resave: false,
+  saveUninitialized: true
+}));
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -68,6 +74,7 @@ app.post('/signup', async (req, res) => {
 
     //Save the user
     const savedUser = await user.save()
+    req.session.user_id = user._id;
     res.json({ userId: user._id })
 
   } catch (error) {
@@ -93,13 +100,19 @@ app.post('/login', async (req, res) => {
 
     if(!isValidPassword) return res.json({error: 'Email or password is invalid'})
 
+    req.session.user_id = user._id;
     res.json({ userId: user._id })
+    console.log(req.session.user_id)
 
   } catch (error) {
     res.status(400).json({error: error.message})
   }
 })
 
+app.post('/logout', (req, res) => {
+  req.session.destroy()
+  res.json({ userId: null })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
