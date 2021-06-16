@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/helpify_logo.png';
 import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
-
   const { currentUser, setCurrentUser } = useAuth();
   const history = useHistory();
   
@@ -30,7 +29,7 @@ const Navbar = () => {
           Helpify
         </Link>
         <div>
-          {(currentUser != null) ? 
+          {(currentUser && currentUser.userId) ? 
             <Fragment>
               <Link to='/my-errands' className='btn btn-outline-secondary me-2'>My Errands</Link>
               <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>
