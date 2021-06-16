@@ -2,12 +2,19 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
+import { useAuth } from '../context/AuthContext';
 
 const MainPage = () => {
   const [ isLoading, data ] = useFetchGet('/errands');
+  const { currentUser } = useAuth();
 
   return (
     <Fragment>
+      {currentUser && (
+        <div>
+          <p>The current user&apos;s id is {currentUser.userId}</p>
+        </div>
+      )}
       {!isLoading ? (
         <ul>
           {data.map(errand => {

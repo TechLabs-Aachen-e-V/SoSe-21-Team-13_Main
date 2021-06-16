@@ -1,11 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../images/helpify_logo.png';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [error, setError] = useState();
-  const [userId, setUserId] = useState();
   const history = useHistory();
+  const { setCurrentUser } = useAuth();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -34,7 +35,7 @@ const Login = () => {
       console.log(data);
       
       if(!data.error) {
-        setUserId(data);
+        setCurrentUser(data);
         return history.replace('/');
       }
       

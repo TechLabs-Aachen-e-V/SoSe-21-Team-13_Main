@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../images/helpify_logo.png';
+import { useAuth } from '../context/AuthContext';
 
 const Signup = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [error, setError] = useState();
-  const [userId, setUserId] = useState();
   const history = useHistory();
+  const { setCurrentUser } = useAuth();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ const Signup = () => {
       const data = await res.json();
       console.log(data);
       if(!data.error) {
-        setUserId(data);
+        setCurrentUser(data);
         return history.replace('/');
       }
       
