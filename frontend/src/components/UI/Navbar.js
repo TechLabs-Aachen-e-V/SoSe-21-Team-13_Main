@@ -30,13 +30,17 @@ const Navbar = () => {
           Helpify
         </Link>
         <div>
-          {(currentUser != null) ? (
-            <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>):(
+          {(currentUser != null) ? 
             <Fragment>
-              <Link to='/signup' className='btn btn-dark me-2'>Sign Up</Link>
-              <Link to='/login' className='btn btn-outline-secondary'>Log In</Link>
+              <Link to='/my-errands' className='btn btn-outline-secondary me-2'>My Errands</Link>
+              <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>
             </Fragment>
-          )}
+            :(
+              <Fragment>
+                <Link to='/signup' className='btn btn-dark me-2'>Sign Up</Link>
+                <Link to='/login' className='btn btn-outline-secondary'>Log In</Link>
+              </Fragment>
+            )}
         </div>
       </div>
     </nav>

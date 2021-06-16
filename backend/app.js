@@ -33,17 +33,26 @@ app.get('/errands', async (req, res) => {
   res.json(errands)
 })
 
+app.get('/my-errands', async (req, res) => {
+  const errands = await Errand.find({user : req.session.user_id});
+  res.json(errands)
+})
+
 app.post('/errands', async (req, res) => {
 
   try {
-    const newErrand = new Errand(req.body)
+    if(req.session.user_id) {
+      const data = req.body;
+      data.user = req.session.user_id;
+      console.log(data);
+      const newErrand = new Errand(data)
 
     //insert error handling here !!
     const errand = await newErrand.save()
     res.json(errand)
-
+  }
   } catch (error) {
-    res.send('Failed to create new errand')
+    res.json({error: 'Failed to create new errand'})
   }
 })
 

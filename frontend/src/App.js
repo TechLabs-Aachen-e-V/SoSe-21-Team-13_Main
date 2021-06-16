@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import NewErrandForm from './pages/NewErrandForm';
 import Signup from './pages/Signup';
 import { AuthContextProvider } from './context/AuthContext';
+import MyErrands from './pages/MyErrands';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <Signup />
+        </Route>
+        <Route path='/my-errands'>
+          <MyErrands />
         </Route>
       </Switch>
     </AuthContextProvider>
