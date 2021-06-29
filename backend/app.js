@@ -118,6 +118,11 @@ app.post('/login', async (req, res) => {
   }
 })
 
+app.get('/me', (req, res) => {
+  const userId = req.session.user_id
+  res.json({ userId })
+})
+
 app.post('/logout', (req, res) => {
   req.session.destroy()
   res.json({ userId: null })
