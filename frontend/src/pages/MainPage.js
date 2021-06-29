@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
 import illu from '../images/illu_1.png';
+import back from '../images/Background-blue.png';
 
 const MainPage = () => {
   const [ isLoading, data ] = useFetchGet('/errands');
 
   return (
     <Fragment>
+      {/* <img className='back' src={back} alt='' width='100%'></img> */}
       <div className='intro-container'>
-      <img className='main-illu' src={illu} alt='' width='40%'></img>
-      <div className='intro-text'>
-       <h1>Welcome to Helpify</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-      </div>
+        {/* <img className='main-illu' src={illu} alt='' width='60%'></img> */}
+        <div className='intro-text'>
+        <h1>Welcome to Helpify</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
       </div>
       {!isLoading ? (
         <div className='container'>

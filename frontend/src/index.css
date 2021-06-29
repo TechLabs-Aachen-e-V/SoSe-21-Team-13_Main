@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Mulish', sans-serif;
+
 }
 
 .btn-dark {
@@ -19,24 +20,45 @@ body {
 
 .card-img {
   max-width: 300px;
+  display: block;
 }
 
 .logo {
   color: #435A7D;
 }
 
+.back {
+  display: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 40%;
+}
+
 .main-illu {
-  display: inline;  
+  /* display: inline-flex; */
+  display: relative;
+  z-index: 1;
+  background-image: "back";
 }
 
 .intro-text {
-  display: inline;
+  display: right;
+  z-index: 1;
+
 }
 
 .intro-container{
   display: block;
+  z-index: 1;
+  background-image: url("./images/Background-blue.png");
+  height: 50rem;
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
+
+
 .container {
-  display: block;
+  display: block;s
 }
