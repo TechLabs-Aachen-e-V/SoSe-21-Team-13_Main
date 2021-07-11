@@ -7,6 +7,7 @@ import NewErrandForm from './pages/NewErrandForm';
 import Signup from './pages/Signup';
 import { AuthContextProvider } from './context/AuthContext';
 import MyErrands from './pages/MyErrands';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <Signup />
+        </Route>
+        <Route path='/profile'>
+          <UserProfile />
         </Route>
         <Route path='/my-errands'>
           <MyErrands />
