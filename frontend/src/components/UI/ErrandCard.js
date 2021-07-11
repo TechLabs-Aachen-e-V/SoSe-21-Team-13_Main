@@ -9,7 +9,7 @@ const ErrandCard = (props) => {
   };
 
   return (
-    <div className='card m-3 col-md-5 col-lg-4 col-xl-3'>
+    <div className='card m-3 col-md-5 col-lg-4 col-xl-3 shadow'>
       <img src={props.image} className='card-img card-img-top mx-auto pt-3' alt='dog-walking' />
       <div className='card-body'>
         <h5 className='card-title'>{props.title}</h5>

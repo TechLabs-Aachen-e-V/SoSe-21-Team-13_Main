@@ -29,6 +29,7 @@ body {
 .back {
   position: absolute;
   z-index: -1;
+  clip-path: ellipse(95% 40% at 33% 16%);
 }
 
 @media (min-width: 1000px) {
