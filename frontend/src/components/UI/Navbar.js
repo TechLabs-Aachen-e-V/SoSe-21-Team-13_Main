@@ -22,11 +22,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='navbar navbar-light bg-light'>
+    <nav className='navbar sticky-top navbar-light bg-light'>
       <div className='container-fluid'>
         <Link className='navbar-brand' to='/'>
-          <img src={logo} alt='' width='45' className='d-inline-block align-text-center' />
-          Helpify
+          <img src={logo} alt='' width='30' className='logo d-inline-block align-text-center ms-2 me-2' />
+          helpify
         </Link>
         <div>
           {(currentUser && currentUser.userId) ? 

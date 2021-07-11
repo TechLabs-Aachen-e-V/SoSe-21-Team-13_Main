@@ -6,7 +6,7 @@ const User = require('./models/user')
 const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
 const app = express()
-const port = 5000
+const port = 5002
 
 app.use(express.json());
 app.use(session({
