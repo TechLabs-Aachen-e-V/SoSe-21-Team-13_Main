@@ -12,31 +12,31 @@ const MainPage = () => {
     <Fragment>
       {/* <img className='back' src={back} alt='' width='100%'></img> */}
       <div className='intro-container'>
-        {/* <img className='main-illu' src={illu} alt='' width='60%'></img> */}
+        <img className='main-illu' src={illu} alt='' width='60%'></img>
         <div className='intro-text'>
-        <h1>Welcome to Helpify</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+          <h1>Welcome to Helpify</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
         </div>
       </div>
       {!isLoading ? (
-        <div className='container'>
-        <ul>
-          {data.map(errand => {
-            return (
-              <ErrandCard
-                key={errand._id}
-                title={errand.title}
-                description={errand.description}
-                location={errand.location}
-                compensation={errand.compensation}
-                dateDue={errand.dateDue}
-                timeDue={errand.timeDue}
-                category={errand.category}
-                image={errand.imageUrl}
-              />
-            );
-          })}
-        </ul>
+        <div>
+          <ul className='d-flex flex-wrap justify-content-center'>
+            {data.map(errand => {
+              return (
+                <ErrandCard
+                  key={errand._id}
+                  title={errand.title}
+                  description={errand.description}
+                  location={errand.location}
+                  compensation={errand.compensation}
+                  dateDue={errand.dateDue}
+                  timeDue={errand.timeDue}
+                  category={errand.category}
+                  image={errand.imageUrl}
+                />
+              );
+            })}
+          </ul>
         </div>
       ) : (<p>Loading...</p>)}
       

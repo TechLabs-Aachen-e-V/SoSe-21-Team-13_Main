@@ -5,7 +5,6 @@
 
 body {
   font-family: 'Mulish', sans-serif;
-
 }
 
 .btn-dark {
@@ -27,38 +26,33 @@ body {
   color: #435A7D;
 }
 
-.back {
-  display: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  opacity: 40%;
+@media (min-width: 1000px) {
+  .intro-container {
+    display: flex;
+    margin: 2rem 13rem;
+  }
+  .main-illu {
+    width: 45%;
+    height: 45%;
+    padding: 2rem;
+  }
 }
 
-.main-illu {
-  /* display: inline-flex; */
-  display: relative;
-  z-index: 1;
-  background-image: "back";
+@media (max-width: 1000px) {
+  .intro-container {
+    margin: 1rem 2rem;
+  }
+  .main-illu {
+    width: 80%;
+    height: 80%;
+    padding: 2rem;
+    display: inline;
+  }
 }
 
 .intro-text {
-  display: right;
-  z-index: 1;
-
-}
-
-.intro-container{
-  display: block;
-  z-index: 1;
-  background-image: url("./images/Background-blue.png");
-  height: 50rem;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-
-
-.container {
-  display: block;s
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
 }
