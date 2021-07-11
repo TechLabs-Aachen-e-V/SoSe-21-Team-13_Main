@@ -1,8 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/helpify_logo.png';
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
+  const { currentUser, setCurrentUser } = useAuth();
+  const history = useHistory();
+  
+  const clickHandler = async () => {
+    const response = await fetch(
+      '/logout',
+      {
+        method: 'POST'
+      }
+    );
+
+    const data = await response.json();
+
+    setCurrentUser(data);
+    history.replace('/');
+  };
+
   return (
     <nav className='navbar sticky-top navbar-light bg-light'>
       <div className='container-fluid'>
@@ -11,8 +29,17 @@ const Navbar = () => {
           helpify
         </Link>
         <div>
-          <Link to='/signup' className='btn btn-dark me-2'>Sign Up</Link>
-          <Link to='/login' className='btn btn-outline-secondary'>Log In</Link>
+          {(currentUser && currentUser.userId) ? 
+            <Fragment>
+              <Link to='/my-errands' className='btn btn-outline-secondary me-2'>My Errands</Link>
+              <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>
+            </Fragment>
+            :(
+              <Fragment>
+                <Link to='/signup' className='btn btn-dark me-2'>Sign Up</Link>
+                <Link to='/login' className='btn btn-outline-secondary'>Log In</Link>
+              </Fragment>
+            )}
         </div>
       </div>
     </nav>

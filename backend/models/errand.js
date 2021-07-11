@@ -35,6 +35,10 @@ const errandSchema = new mongoose.Schema({
     },
     errandStatus: {
         type: Boolean,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 
