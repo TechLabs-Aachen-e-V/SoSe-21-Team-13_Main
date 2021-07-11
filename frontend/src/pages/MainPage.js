@@ -10,7 +10,7 @@ const MainPage = () => {
 
   return (
     <Fragment>
-      {/* <img className='back' src={back} alt='' width='100%'></img> */}
+      <img className='back' src={back} alt='' width='100%'></img>
       <div className='intro-container'>
         <img className='main-illu' src={illu} alt='' width='60%'></img>
         <div className='intro-text'>

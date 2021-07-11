@@ -26,6 +26,11 @@ body {
   color: #435A7D;
 }
 
+.back {
+  position: absolute;
+  z-index: -1;
+}
+
 @media (min-width: 1000px) {
   .intro-container {
     display: flex;
