@@ -29,30 +29,34 @@ body {
 @media (min-width: 1000px) {
   .intro-container {
     display: flex;
-    margin: 2rem 13rem;
+    margin: 1rem 13rem;
   }
   .main-illu {
-    width: 45%;
-    height: 45%;
+    width: 55%;
+    height: 55%;
+    padding: 1rem;
+  }
+  .intro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 2rem;
   }
 }
 
 @media (max-width: 1000px) {
   .intro-container {
-    margin: 1rem 2rem;
+    margin: 1rem 2rem 3rem;
   }
   .main-illu {
     width: 80%;
     height: 80%;
-    padding: 2rem;
-    display: inline;
+    padding: 1rem;
+    display: block;
+    margin: 0 auto;
   }
-}
-
-.intro-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem;
+  .intro-text {
+    margin: 0 7rem;
+    text-align: center;
+  }
 }
