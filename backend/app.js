@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const session = require('express-session')
 const User = require('./models/user')
+const Errand = require('./models/errand');
 const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
 const app = express()
@@ -23,11 +24,6 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTop
     console.log("Error: ", err);
   })
 
-// import models from ./models
-// const User = require('./models/user');
-const Errand = require('./models/errand');
-
-
 app.get('/errands', async (req, res) => {
   const errands = await Errand.find()
   res.json(errands)
@@ -36,6 +32,12 @@ app.get('/errands', async (req, res) => {
 app.get('/my-errands', async (req, res) => {
   const errands = await Errand.find({user : req.session.user_id});
   res.json(errands)
+})
+
+app.get('/user-profile', async (req, res) => {
+  const user = await User.findOne({_id : req.session.user_id});
+  const data_user = {firstName: user.firstName, lastName: user.lastName, email: user.email}
+  res.json(data_user);
 })
 
 app.post('/errands', async (req, res) => {
