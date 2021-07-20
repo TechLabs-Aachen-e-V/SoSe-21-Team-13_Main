@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTop
   })
 
 app.get('/errands', async (req, res) => {
-  const errands = await Errand.find()
+  const errands = await Errand.find().sort({ compensation: req.query.comp_sorting})
   res.json(errands)
 })
 

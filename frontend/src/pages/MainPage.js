@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
@@ -7,11 +7,18 @@ import illu from '../images/illu_1.png';
 import back from '../images/Background-blue.png';
 
 const MainPage = () => {
-  const [ isLoading, data ] = useFetchGet('/errands');
+  const [sortByCompensation, setSortByCompensation] = useState('desc');
+
+  const sortHandler = () => {
+    setSortByCompensation(sortByCompensation == 'asc' ? 'desc' : 'asc');
+  };
+
+  const [ isLoading, data ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
   const { currentUser } = useAuth();
 
   return (
     <Fragment>
+      <button onClick={sortHandler}>Sort by compensation</button>
       {currentUser && (
         <div>
           <p>The current user&apos;s id is {currentUser.userId}</p>

@@ -12,7 +12,7 @@ const useFetchGet = (url) => {
         setIsLoading(false);
         setData(data);
       });
-  }, []);
+  }, [url]);
   return [ isLoading, data ];
 };
 
