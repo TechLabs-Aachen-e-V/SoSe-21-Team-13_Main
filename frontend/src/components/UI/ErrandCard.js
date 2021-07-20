@@ -11,7 +11,16 @@ const ErrandCard = (props) => {
   };
 
   const deleteHandler = () => {
-    
+    const errandId = props.id;
+    const testObj = {};
+
+    fetch(`/errands/${errandId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(testObj)
+    });
   };
 
   return (

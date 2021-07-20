@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
@@ -13,7 +13,22 @@ const MainPage = () => {
     setSortByCompensation(sortByCompensation == 'asc' ? 'desc' : 'asc');
   };
 
-  const [ isLoading, data ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+  // const [ isLoading, data ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+
+  const [isLoading, setIsLoading] = useState(true); 
+  const [data, setData] = useState([]);
+
+  // ask felix how to redirect/refresh
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(`/errands?comp_sorting=${sortByCompensation}`)
+      .then(response => response.json())
+      .then(data => {
+        setIsLoading(false);
+        setData(data);
+      });
+  }, []);
+
   const { currentUser } = useAuth();
 
   return (
@@ -39,6 +54,7 @@ const MainPage = () => {
               return (
                 <ErrandCard
                   key={errand._id}
+                  id={errand._id}
                   title={errand.title}
                   description={errand.description}
                   location={errand.location}

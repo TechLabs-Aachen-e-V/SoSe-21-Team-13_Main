@@ -19,16 +19,7 @@ export const AuthContextProvider = ({ children }) => {
           setCurrentUser(data);
         }
       });
-  }, []);
-
-  // useEffect(() => {
-  //   fetch('/errands')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data[0]);
-  //     });
-  // }, []);
-  
+  }, []);  
 
   const value = {
     currentUser,
