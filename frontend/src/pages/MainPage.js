@@ -47,6 +47,7 @@ const MainPage = () => {
                   timeDue={errand.timeDue}
                   category={errand.category}
                   image={errand.imageUrl}
+                  user={errand.user}
                 />
               );
             })}

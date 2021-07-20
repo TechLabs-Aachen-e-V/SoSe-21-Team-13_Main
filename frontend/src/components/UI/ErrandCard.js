@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { currentUser } = useAuth();
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
+  };
+
+  const deleteHandler = () => {
+    
   };
 
   return (
@@ -15,6 +21,10 @@ const ErrandCard = (props) => {
         <h5 className='card-title'>{props.title}</h5>
         <p className='card-text'>{props.description}</p>
         <button onClick={clickHandler} className='btn btn-dark'>{isVisible ? 'Hide details' : 'More details'}</button>
+        {
+          (currentUser && currentUser.userId === props.user) &&
+            <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
+        }
         {isVisible && 
         (
           <div className='mt-3'>
