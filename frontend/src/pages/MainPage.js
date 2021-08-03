@@ -2,7 +2,7 @@ import React, { Fragment, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
-// import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import illu from '../images/illu_1.png';
 import back from '../images/Background-blue.png';
 
@@ -14,6 +14,8 @@ const MainPage = () => {
   };
 
   const [ isLoading, data, getData ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+
+  const { currentUser } = useAuth();
 
   const refreshMain = useCallback(
     () => {
