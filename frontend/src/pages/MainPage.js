@@ -12,17 +12,17 @@ const MainPage = () => {
 
   return (
     <Fragment>
-      {currentUser && (
+      {/* {currentUser?.userId && (
         <div>
           <p>The current user&apos;s id is {currentUser.userId}</p>
         </div>
-      )}
+      )} */}
       <img className='back' src={back} alt='' width='100%'></img>
       <div className='intro-container'>
         <img className='main-illu' src={illu} alt='' width='60%'></img>
         <div className='intro-text'>
           <h1>Welcome to Helpify</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+          <p>Hire someone else to run your errands with a web app.</p>
         </div>
       </div>
       {!isLoading ? (
@@ -47,9 +47,12 @@ const MainPage = () => {
         </div>
       ) : (<p>Loading...</p>)}
       
-      <div className='pt-4 mb-5' align='center'>
-        <Link to='/new-errand' className='btn btn-success mx-auto'>Add new errand</Link>
-      </div>
+      {currentUser?.userId && (
+        <div className='pt-4 mb-5' align='center'>
+          <Link to='/new-errand' className='btn btn-success mx-auto'>Add new errand</Link>
+        </div>
+      )}
+      
     </Fragment>
   );
 };

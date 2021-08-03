@@ -7,9 +7,9 @@ const MyErrands = () => {
   const [ isLoading, data ] = useFetchGet('/my-errands');
 
   return (
-    <Fragment>
+    <div>
       {!isLoading ? (
-        <ul>
+        <ul className='d-flex flex-wrap justify-content-center'>
           {data.map(errand => {
             return (
               <ErrandCard
@@ -27,7 +27,7 @@ const MyErrands = () => {
           })}
         </ul>
       ) : (<p>Loading...</p>)}
-    </Fragment>
+    </div>
   );
 };
 

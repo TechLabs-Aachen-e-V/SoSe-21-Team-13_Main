@@ -18,6 +18,7 @@ const Navbar = () => {
     const data = await response.json();
 
     setCurrentUser(data);
+    console.log(data);
     history.replace('/');
   };
 
