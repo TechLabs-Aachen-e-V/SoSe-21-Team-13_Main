@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useHistory } from 'react-router';
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const { currentUser } = useAuth();
-  const history = useHistory();
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
@@ -24,7 +22,7 @@ const ErrandCard = (props) => {
       body: JSON.stringify(testObj)
     });
 
-    history.go(0);
+    props.refreshMain();
   };
 
   return (

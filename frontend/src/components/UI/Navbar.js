@@ -32,7 +32,7 @@ const Navbar = () => {
           {(currentUser && currentUser.userId) ? 
             <Fragment>
               <Link to='/profile' className='btn btn-outline-secondary me-2'>Profile</Link>
-              <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>
+              <button to='/' className='btn btn-dark me-2' onClick={clickHandler}>Log out</button>
             </Fragment>
             :(
               <Fragment>

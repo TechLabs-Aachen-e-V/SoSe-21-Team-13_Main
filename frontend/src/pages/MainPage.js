@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import React, { Fragment, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 import illu from '../images/illu_1.png';
 import back from '../images/Background-blue.png';
 
@@ -36,16 +36,15 @@ const MainPage = () => {
   //     });
   // }, [sortByCompensation]);
 
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
 
   return (
     <Fragment>
-      <button onClick={sortHandler}>Sort by compensation</button>
-      {currentUser && (
+      {/* {currentUser && (
         <div>
           <p>The current user&apos;s id is {currentUser.userId}</p>
         </div>
-      )}
+      )} */}
       <img className='back' src={back} alt='' width='100%'></img>
       <div className='intro-container'>
         <img className='main-illu' src={illu} alt='' width='60%'></img>
@@ -53,6 +52,9 @@ const MainPage = () => {
           <h1>Welcome to Helpify</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
         </div>
+      </div>
+      <div className='text-center'>
+        <button className='btn btn-dark mt-4 ms-2' onClick={sortHandler}>Sort by compensation</button>
       </div>
       {!isLoading ? (
         <div>

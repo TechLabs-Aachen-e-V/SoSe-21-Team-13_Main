@@ -17,10 +17,6 @@ const UserProfile = () => {
         </ul>
       ) : (<p>Loading...</p>)}
 
-      {/* <ul>
-        <li>User Email</li>
-      </ul> */}
-
       {!isLoading ? (
         <ul>
           {data.map(errand => {
