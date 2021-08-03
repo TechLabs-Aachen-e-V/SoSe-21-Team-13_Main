@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const session = require('express-session')
 const User = require('./models/user')
+const Errand = require('./models/errand');
 const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
 const app = express()
@@ -23,19 +24,36 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTop
     console.log("Error: ", err);
   })
 
-// import models from ./models
-// const User = require('./models/user');
-const Errand = require('./models/errand');
-
-
 app.get('/errands', async (req, res) => {
-  const errands = await Errand.find()
+  const errands = await Errand.find().sort({ compensation: req.query.comp_sorting})
   res.json(errands)
+})
+
+app.delete('/errands/:id', async (req, res) => {
+  // check if user is logged in before deleting
+  try
+  {
+  if(req.session.user_id) {
+    const errand = await Errand.findOne({ _id: req.params.id});
+    if (req.session.user_id == errand.user._id) {
+    const msg = await Errand.findOneAndDelete({ _id: req.params.id});
+    }
+  }
+  } catch (error) {
+    console.log(error);
+  }
+  res.status(200).end();
 })
 
 app.get('/my-errands', async (req, res) => {
   const errands = await Errand.find({user : req.session.user_id});
   res.json(errands)
+})
+
+app.get('/user-profile', async (req, res) => {
+  const user = await User.findOne({_id : req.session.user_id});
+  const data_user = {firstName: user.firstName, lastName: user.lastName, email: user.email}
+  res.json(data_user);
 })
 
 app.post('/errands', async (req, res) => {

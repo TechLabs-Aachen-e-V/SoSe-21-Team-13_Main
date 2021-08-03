@@ -1,18 +1,46 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 import illu from '../images/illu_1.png';
 import back from '../images/Background-blue.png';
 
 const MainPage = () => {
-  const [ isLoading, data ] = useFetchGet('/errands');
-  const { currentUser } = useAuth();
+  const [sortByCompensation, setSortByCompensation] = useState('desc');
+
+  const sortHandler = () => {
+    setSortByCompensation(sortByCompensation === 'asc' ? 'desc' : 'asc');
+  };
+
+  const [ isLoading, data, getData ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+
+  const refreshMain = useCallback(
+    () => {
+      getData();
+    },
+    [],
+  );
+
+  // const [isLoading, setIsLoading] = useState(true); 
+  // const [data, setData] = useState([]);
+
+  // ask felix how to redirect/refresh
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetch(`/errands?comp_sorting=${sortByCompensation}`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setIsLoading(false);
+  //       setData(data);
+  //     });
+  // }, [sortByCompensation]);
+
+  // const { currentUser } = useAuth();
 
   return (
     <Fragment>
-      {/* {currentUser?.userId && (
+      {/* {currentUser && (
         <div>
           <p>The current user&apos;s id is {currentUser.userId}</p>
         </div>
@@ -25,6 +53,9 @@ const MainPage = () => {
           <p>Hire someone else to run your errands with a web app.</p>
         </div>
       </div>
+      <div className='text-center'>
+        <button className='btn btn-dark mt-4 ms-2' onClick={sortHandler}>Sort by compensation</button>
+      </div>
       {!isLoading ? (
         <div>
           <ul className='d-flex flex-wrap justify-content-center'>
@@ -32,6 +63,7 @@ const MainPage = () => {
               return (
                 <ErrandCard
                   key={errand._id}
+                  id={errand._id}
                   title={errand.title}
                   description={errand.description}
                   location={errand.location}
@@ -40,6 +72,8 @@ const MainPage = () => {
                   timeDue={errand.timeDue}
                   category={errand.category}
                   image={errand.imageUrl}
+                  user={errand.user}
+                  refreshMain={refreshMain}
                 />
               );
             })}
@@ -52,7 +86,6 @@ const MainPage = () => {
           <Link to='/new-errand' className='btn btn-success mx-auto'>Add new errand</Link>
         </div>
       )}
-      
     </Fragment>
   );
 };

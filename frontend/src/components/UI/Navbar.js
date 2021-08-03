@@ -18,7 +18,6 @@ const Navbar = () => {
     const data = await response.json();
 
     setCurrentUser(data);
-    console.log(data);
     history.replace('/');
   };
 
@@ -32,8 +31,8 @@ const Navbar = () => {
         <div>
           {(currentUser && currentUser.userId) ? 
             <Fragment>
-              <Link to='/my-errands' className='btn btn-outline-secondary me-2'>My Errands</Link>
-              <button to='/' className='btn btn-dark me-2' onClick={ clickHandler }>Log out</button>
+              <Link to='/profile' className='btn btn-outline-secondary me-2'>Profile</Link>
+              <button to='/' className='btn btn-dark me-2' onClick={clickHandler}>Log out</button>
             </Fragment>
             :(
               <Fragment>

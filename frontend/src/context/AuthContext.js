@@ -19,8 +19,7 @@ export const AuthContextProvider = ({ children }) => {
           setCurrentUser(data);
         }
       });
-  }, []);
-  
+  }, []);  
 
   const value = {
     currentUser,

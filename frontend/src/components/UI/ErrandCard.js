@@ -1,11 +1,28 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { currentUser } = useAuth();
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
+  };
+
+  const deleteHandler = async () => {
+    const errandId = props.id;
+    const testObj = {};
+
+    await fetch(`/errands/${errandId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(testObj)
+    });
+
+    props.refreshMain();
   };
 
   return (
@@ -23,6 +40,20 @@ const ErrandCard = (props) => {
             <p>Date due: {props.dateDue}</p>
             <p>Time due: {props.timeDue}</p>
             <p>Category: {props.category}</p>
+            {
+              (currentUser && currentUser.userId === props.user) &&
+              (<div className='text-center'>
+                <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
+              </div>
+              )
+            }
+            {
+              (currentUser && currentUser.userId !== props.user) &&
+              (<div className='text-center'>
+                <button className = 'btn btn-secondary'>Contact user</button>
+              </div>
+              )
+            }
           </div>
         )
         }
