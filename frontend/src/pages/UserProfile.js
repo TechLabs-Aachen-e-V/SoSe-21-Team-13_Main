@@ -1,11 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import useFetchGet from '../hooks/useFetchGet';
 import ErrandCard from '../components/UI/ErrandCard';
 
 const UserProfile = () => {
   
-  const [ isLoading, data ] = useFetchGet('/my-errands');
+  const [ isLoading, data, getData ] = useFetchGet('/my-errands');
   const [ isLoading_user, data_user] = useFetchGet('/user-profile');
+
+  const refreshMain = useCallback(
+    () => {
+      getData();
+    },
+    [],
+  );
 
   return(
     <Fragment>
@@ -23,6 +30,7 @@ const UserProfile = () => {
             return (
               <ErrandCard
                 key={errand._id}
+                id={errand._id}
                 title={errand.title}
                 description={errand.description}
                 location={errand.location}
@@ -32,6 +40,7 @@ const UserProfile = () => {
                 category={errand.category}
                 image={errand.imageUrl}
                 user={errand.user}
+                refreshMain={refreshMain}
               />
             );
           })}

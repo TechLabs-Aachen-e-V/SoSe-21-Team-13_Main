@@ -41,7 +41,7 @@ const ErrandCard = (props) => {
             <p>Time due: {props.timeDue}</p>
             <p>Category: {props.category}</p>
             {
-              (currentUser && currentUser.userId == props.user) &&
+              (currentUser && currentUser.userId === props.user) &&
               (<div className='text-center'>
                 <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
               </div>
