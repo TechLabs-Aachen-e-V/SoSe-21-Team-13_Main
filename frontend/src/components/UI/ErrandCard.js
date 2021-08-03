@@ -1,26 +1,30 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useHistory } from 'react-router';
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const { currentUser } = useAuth();
+  const history = useHistory();
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
   };
 
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     const errandId = props.id;
     const testObj = {};
 
-    fetch(`/errands/${errandId}`, {
+    await fetch(`/errands/${errandId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(testObj)
     });
+
+    history.go(0);
   };
 
   return (
@@ -30,10 +34,6 @@ const ErrandCard = (props) => {
         <h5 className='card-title'>{props.title}</h5>
         <p className='card-text'>{props.description}</p>
         <button onClick={clickHandler} className='btn btn-dark'>{isVisible ? 'Hide details' : 'More details'}</button>
-        {
-          (currentUser && currentUser.userId === props.user) &&
-            <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
-        }
         {isVisible && 
         (
           <div className='mt-3'>
@@ -42,6 +42,20 @@ const ErrandCard = (props) => {
             <p>Date due: {props.dateDue}</p>
             <p>Time due: {props.timeDue}</p>
             <p>Category: {props.category}</p>
+            {
+              (currentUser && currentUser.userId == props.user) &&
+              (<div className='text-center'>
+                <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
+              </div>
+              )
+            }
+            {
+              (currentUser && currentUser.userId !== props.user) &&
+              (<div className='text-center'>
+                <button className = 'btn btn-secondary'>Contact user</button>
+              </div>
+              )
+            }
           </div>
         )
         }

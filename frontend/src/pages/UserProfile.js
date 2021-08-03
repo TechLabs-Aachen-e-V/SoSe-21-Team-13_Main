@@ -35,6 +35,7 @@ const UserProfile = () => {
                 timeDue={errand.timeDue}
                 category={errand.category}
                 image={errand.imageUrl}
+                user={errand.user}
               />
             );
           })}

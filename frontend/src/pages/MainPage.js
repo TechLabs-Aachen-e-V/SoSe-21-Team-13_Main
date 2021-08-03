@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ErrandCard from '../components/UI/ErrandCard';
 import useFetchGet from '../hooks/useFetchGet';
@@ -10,24 +10,31 @@ const MainPage = () => {
   const [sortByCompensation, setSortByCompensation] = useState('desc');
 
   const sortHandler = () => {
-    setSortByCompensation(sortByCompensation == 'asc' ? 'desc' : 'asc');
+    setSortByCompensation(sortByCompensation === 'asc' ? 'desc' : 'asc');
   };
 
-  // const [ isLoading, data ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+  const [ isLoading, data, getData ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
 
-  const [isLoading, setIsLoading] = useState(true); 
-  const [data, setData] = useState([]);
+  const refreshMain = useCallback(
+    () => {
+      getData();
+    },
+    [],
+  );
+
+  // const [isLoading, setIsLoading] = useState(true); 
+  // const [data, setData] = useState([]);
 
   // ask felix how to redirect/refresh
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`/errands?comp_sorting=${sortByCompensation}`)
-      .then(response => response.json())
-      .then(data => {
-        setIsLoading(false);
-        setData(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetch(`/errands?comp_sorting=${sortByCompensation}`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setIsLoading(false);
+  //       setData(data);
+  //     });
+  // }, [sortByCompensation]);
 
   const { currentUser } = useAuth();
 
@@ -64,6 +71,7 @@ const MainPage = () => {
                   category={errand.category}
                   image={errand.imageUrl}
                   user={errand.user}
+                  refreshMain={refreshMain}
                 />
               );
             })}

@@ -31,8 +31,18 @@ app.get('/errands', async (req, res) => {
 
 app.delete('/errands/:id', async (req, res) => {
   // check if user is logged in before deleting
-  const msg = await Errand.findOneAndDelete({ _id: req.params.id});
-  console.log(msg);
+  try
+  {
+  if(req.session.user_id) {
+    const errand = await Errand.findOne({ _id: req.params.id});
+    if (req.session.user_id == errand.user._id) {
+    const msg = await Errand.findOneAndDelete({ _id: req.params.id});
+    }
+  }
+  } catch (error) {
+    console.log(error);
+  }
+  res.status(200).end();
 })
 
 app.get('/my-errands', async (req, res) => {
