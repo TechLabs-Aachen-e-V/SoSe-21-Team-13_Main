@@ -25,6 +25,14 @@ const ErrandCard = (props) => {
     props.refreshMain();
   };
 
+  const bookHandler = async () => {
+    const errandId = props.id;
+
+    await fetch(`/errands/${errandId}/book`, {
+      method: 'POST'
+    });
+  };
+
   return (
     <div className='card m-3 col-md-5 col-lg-4 col-xl-3 shadow'>
       <img src={props.image} className='card-img card-img-top mx-auto pt-3' alt='dog-walking' />
@@ -50,7 +58,7 @@ const ErrandCard = (props) => {
             {
               (currentUser && currentUser.userId !== props.user) &&
               (<div className='text-center'>
-                <button className = 'btn btn-secondary'>Contact user</button>
+                <button className = 'btn btn-secondary' onClick={bookHandler} >Book errand</button>
               </div>
               )
             }

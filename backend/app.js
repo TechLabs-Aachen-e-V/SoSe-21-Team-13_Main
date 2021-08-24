@@ -141,6 +141,21 @@ app.get('/me', (req, res) => {
   res.json({ userId })
 })
 
+app.post('/errands/:id/book', async (req, res) => {
+  try {
+    const user = await User.findOne({ _id : req.session.user_id });
+    const errand = await Errand.findOne({ _id: req.params.id });
+    if (user._id !== errand.user._id && !errand.assignedUser) {
+      errand.assignedUser = user._id;
+      await errand.save();
+    }
+
+    res.status(204).end()
+  } catch(error) {
+    console.log(error)
+  }
+})
+
 app.post('/logout', (req, res) => {
   req.session.destroy()
   res.json({ userId: null })

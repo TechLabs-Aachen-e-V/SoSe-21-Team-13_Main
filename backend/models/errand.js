@@ -39,6 +39,10 @@ const errandSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    assignedUser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 
