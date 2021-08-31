@@ -50,16 +50,23 @@ const ErrandCard = (props) => {
             <p>Category: {props.category}</p>
             {
               (currentUser && currentUser.userId === props.user) &&
-              (<div className='text-center'>
+              (<div className='text-center mb-2'>
                 <button onClick={deleteHandler} className = 'btn btn-danger'>Delete errand</button>
               </div>
               )
             }
             {
-              (currentUser && currentUser.userId !== props.user) &&
-              (<div className='text-center'>
-                <button className = 'btn btn-secondary' onClick={bookHandler} >Book errand</button>
-              </div>
+              (currentUser && currentUser.userId !== props.user && !props.assignedUser) &&
+                (<div className='text-center'>
+                  <button className = 'btn btn-secondary' onClick={bookHandler} >Book errand</button>
+                </div>
+                )
+            }
+            {
+              (props.assignedUser) && (
+                <div className='text-center'>
+                  <button className = 'btn btn-secondary disabled' >Errand is unavailable</button>
+                </div>
               )
             }
           </div>
