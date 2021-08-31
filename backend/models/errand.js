@@ -36,6 +36,9 @@ const errandSchema = new mongoose.Schema({
     errandStatus: {
         type: Boolean,
     },
+    requestMsg :{
+        type: String,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import Modal from './Modal';
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const { currentUser } = useAuth();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
@@ -25,12 +27,18 @@ const ErrandCard = (props) => {
     props.refreshMain();
   };
 
-  const bookHandler = async () => {
-    const errandId = props.id;
+  const requestHandler = async () => {
+    //const errandId = props.id;
 
-    await fetch(`/errands/${errandId}/book`, {
-      method: 'POST'
-    });
+    setModalIsOpen(!modalIsOpen);
+    // await fetch(`/errands/${errandId}/book`, {
+    //   method: 'POST'
+    // });
+  };
+
+  const submitRequestHandler = async(event) => {
+    event.preventDefault();
+    console.log('errand requested');
   };
 
   return (
@@ -57,10 +65,23 @@ const ErrandCard = (props) => {
             }
             {
               (currentUser && currentUser.userId !== props.user && !props.assignedUser) &&
-                (<div className='text-center'>
-                  <button className = 'btn btn-secondary' onClick={bookHandler} >Book errand</button>
+                (<div className='text-center mb-2'>
+                  <button className = 'btn btn-secondary' onClick={requestHandler} >Request errand</button>
                 </div>
                 )
+            }
+            {
+              modalIsOpen && (
+                <form onSubmit={submitRequestHandler}>
+                  <div className='form-floating mb-2'>
+                    <textarea className='form-control' id='request-msg' name='request-msg'
+                      rows='5' cols='34'>
+                      Hey, ...
+                    </textarea>
+                    <button className='btn btn-primary'>Send</button>
+                  </div>
+                </form>
+              )
             }
             {
               (props.assignedUser) && (
