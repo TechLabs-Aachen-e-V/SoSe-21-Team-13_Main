@@ -50,11 +50,12 @@ app.get('/my-errands', async (req, res) => {
   res.json(errands)
 })
 
-app.get('/user-profile', async (req, res) => {
-  const user = await User.findOne({_id : req.session.user_id});
+app.get('/user-profile/:id', async (req, res) => {
+  const user = await User.findOne({_id :  req.params.id});
   const data_user = {firstName: user.firstName, lastName: user.lastName, email: user.email}
   res.json(data_user);
 })
+
 
 app.post('/errands', async (req, res) => {
 

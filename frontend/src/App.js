@@ -7,6 +7,7 @@ import NewErrandForm from './pages/NewErrandForm';
 import Signup from './pages/Signup';
 import { AuthContextProvider } from './context/AuthContext';
 import UserProfile from './pages/UserProfile';
+import ContactProfile from './pages/ContactProfile';
 
 function App() {
   return (
@@ -25,7 +26,10 @@ function App() {
         <Route path='/signup'>
           <Signup />
         </Route>
-        <Route path='/profile'>
+        <Route path='/profile/:id'>
+          <ContactProfile />
+        </Route>
+        <Route path='/profile' exact>
           <UserProfile />
         </Route>
       </Switch>

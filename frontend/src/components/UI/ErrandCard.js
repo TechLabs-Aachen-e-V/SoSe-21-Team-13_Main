@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import Modal from './Modal';
+import { useHistory } from 'react-router-dom';
+import useFetchGet from '../../hooks/useFetchGet';
+
 
 const ErrandCard = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const { currentUser } = useAuth();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
   const clickHandler = () => {
     setIsVisible(!isVisible);
@@ -27,19 +29,24 @@ const ErrandCard = (props) => {
     props.refreshMain();
   };
 
-  const requestHandler = async () => {
-    //const errandId = props.id;
+  const history = useHistory();
 
-    setModalIsOpen(!modalIsOpen);
-    // await fetch(`/errands/${errandId}/book`, {
-    //   method: 'POST'
-    // });
+  const requestHandler = async () => {
+    const errandId = props.id;
+
+    await fetch(`/errands/${errandId}/book`, {
+      method: 'POST'
+    });
+
+    history.replace(`/profile/${props.user}`);
   };
 
   const submitRequestHandler = async(event) => {
     event.preventDefault();
     console.log('errand requested');
   };
+
+  const [ isLoading_user, data_user] = useFetchGet(`/user-profile/${props.user}`);
 
   return (
     <div className='card m-3 col-md-5 col-lg-4 col-xl-3 shadow'>
@@ -56,6 +63,7 @@ const ErrandCard = (props) => {
             <p>Date due: {props.dateDue}</p>
             <p>Time due: {props.timeDue}</p>
             <p>Category: {props.category}</p>
+            <p>Email: {props.user.email}</p>
             {
               (currentUser && currentUser.userId === props.user) &&
               (<div className='text-center mb-2'>
@@ -69,19 +77,6 @@ const ErrandCard = (props) => {
                   <button className = 'btn btn-secondary' onClick={requestHandler} >Request errand</button>
                 </div>
                 )
-            }
-            {
-              modalIsOpen && (
-                <form onSubmit={submitRequestHandler}>
-                  <div className='form-floating mb-2'>
-                    <textarea className='form-control' id='request-msg' name='request-msg'
-                      rows='5' cols='34'>
-                      Hey, ...
-                    </textarea>
-                    <button className='btn btn-primary'>Send</button>
-                  </div>
-                </form>
-              )
             }
             {
               (props.assignedUser) && (

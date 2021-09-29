@@ -1,11 +1,14 @@
 import React, { Fragment, useCallback } from 'react';
 import useFetchGet from '../hooks/useFetchGet';
 import ErrandCard from '../components/UI/ErrandCard';
+import { useAuth } from '../context/AuthContext';
 
 const UserProfile = () => {
   
+  const { currentUser } = useAuth();
+
   const [ isLoading, data, getData ] = useFetchGet('/my-errands');
-  const [ isLoading_user, data_user] = useFetchGet('/user-profile');
+  const [ isLoading_user, data_user] = useFetchGet(`/user-profile/${currentUser.userId}`);
 
   const refreshMain = useCallback(
     () => {
