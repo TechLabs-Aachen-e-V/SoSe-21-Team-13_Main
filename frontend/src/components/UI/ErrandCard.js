@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
-import useFetchGet from '../../hooks/useFetchGet';
 
 
 const ErrandCard = (props) => {
@@ -41,13 +40,6 @@ const ErrandCard = (props) => {
     history.replace(`/profile/${props.user}`);
   };
 
-  const submitRequestHandler = async(event) => {
-    event.preventDefault();
-    console.log('errand requested');
-  };
-
-  const [ isLoading_user, data_user] = useFetchGet(`/user-profile/${props.user}`);
-
   return (
     <div className='card m-3 col-md-5 col-lg-4 col-xl-3 shadow'>
       <img src={props.image} className='card-img card-img-top mx-auto pt-3' alt='dog-walking' />
@@ -63,7 +55,6 @@ const ErrandCard = (props) => {
             <p>Date due: {props.dateDue}</p>
             <p>Time due: {props.timeDue}</p>
             <p>Category: {props.category}</p>
-            <p>Email: {props.user.email}</p>
             {
               (currentUser && currentUser.userId === props.user) &&
               (<div className='text-center mb-2'>

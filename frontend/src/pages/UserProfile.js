@@ -20,11 +20,9 @@ const UserProfile = () => {
   return(
     <Fragment>
       {!isLoading_user ? (
-        <ul>
-          <li>{data_user.firstName}</li>
-          <li>{data_user.lastName}</li>
-          <li>{data_user.email}</li>
-        </ul>
+        <div className='px-5 py-3'>
+          <h1>Welcome, {data_user.firstName} {data_user.lastName}</h1>
+        </div>
       ) : (<p>Loading...</p>)}
 
       <h2 className='px-4'>Unbooked errands</h2>

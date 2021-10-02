@@ -17,6 +17,11 @@ body {
   border-color: #769fbb;
 }
 
+.btn-dark:focus {
+  background-color: #344661;
+  border-color: #34466D;
+}
+
 .card-img {
   max-width: 300px;
   display: block;
