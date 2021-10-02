@@ -75,6 +75,7 @@ const MainPage = () => {
                   category={errand.category}
                   image={errand.imageUrl}
                   user={errand.user}
+                  assignedUser={errand.assignedUser}
                   refreshMain={refreshMain}
                 />
               );
