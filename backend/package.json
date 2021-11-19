@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"cd ../frontend && npm start\" \"nodemon app\""
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.1",
     "concurrently": "^6.2.0",
     "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",

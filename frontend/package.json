@@ -40,5 +40,5 @@
     "eslint": "^7.27.0",
     "eslint-plugin-react": "^7.23.2"
   },
-  "proxy": "http://localhost:5002"
+  "proxy": "http://helpify-test-deploy.azurewebsites.net"
 }

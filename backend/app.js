@@ -1,17 +1,26 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
+const cors = require('cors')
 const session = require('express-session')
 const User = require('./models/user')
 const Errand = require('./models/errand');
 const { signupValidation, loginValidation } = require('./validation')
 const bcrypt = require('bcrypt')
 const app = express()
-const port = 5002
+const port = process.env.PORT || 5002
+
+// CORS
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
+app.use(cors())
+app.options('*', cors(corsOptions))
 
 app.use(express.json());
 app.use(session({
-  secret: "ChangeInProduction",
+  secret: "jvsg87dvskjfgsdhjfkgsdkch78aghfiquwh",
   resave: false,
   saveUninitialized: true
 }));
