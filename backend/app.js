@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
-const cors = require('cors')
+// const cors = require('cors')
 const session = require('express-session')
 const User = require('./models/user')
 const Errand = require('./models/errand');
@@ -10,13 +10,13 @@ const bcrypt = require('bcrypt')
 const app = express()
 const port = process.env.PORT || 5002
 
-// CORS
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
-}
-app.use(cors())
-app.options('*', cors(corsOptions))
+// // CORS
+// const corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200
+// }
+// app.use(cors(corsOptions))
+// app.options('*', cors())
 
 app.use(express.json());
 app.use(session({

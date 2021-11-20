@@ -6,7 +6,7 @@ const ContactProfile = () => {
   
   let { id } = useParams();
 
-  const [ isLoading_user, data_user] = useFetchGet(`/user-profile/${id}`);
+  const [ isLoading_user, data_user] = useFetchGet(`${process.env.REACT_APP_API_URL}/user-profile/${id}`);
   
   console.log('test');
 

@@ -13,7 +13,7 @@ const MainPage = () => {
     setSortByCompensation(sortByCompensation === 'asc' ? 'desc' : 'asc');
   };
 
-  const [ isLoading, data, getData ] = useFetchGet(`/errands?comp_sorting=${sortByCompensation}`);
+  const [ isLoading, data, getData ] = useFetchGet(`${process.env.REACT_APP_API_URL}/errands?comp_sorting=${sortByCompensation}`);
 
   const { currentUser } = useAuth();
 

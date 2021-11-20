@@ -21,7 +21,7 @@ const Login = () => {
       };
 
       const response = await fetch(
-        '/login',
+        `${process.env.REACT_APP_API_URL}/login`,
         {
           method: 'POST',
           body: JSON.stringify(user),

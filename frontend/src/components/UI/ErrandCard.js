@@ -17,7 +17,7 @@ const ErrandCard = (props) => {
     const errandId = props.id;
     const testObj = {};
 
-    await fetch(`/errands/${errandId}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/errands/${errandId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const ErrandCard = (props) => {
   const requestHandler = async () => {
     const errandId = props.id;
 
-    await fetch(`/errands/${errandId}/book`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/errands/${errandId}/book`, {
       method: 'POST'
     });
 

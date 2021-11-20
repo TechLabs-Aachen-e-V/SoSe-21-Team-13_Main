@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    fetch('/me')
+    fetch(`${process.env.REACT_APP_API_URL}/me`)
       .then(response => response.json())
       .then(data => {
         if (data.userId) {

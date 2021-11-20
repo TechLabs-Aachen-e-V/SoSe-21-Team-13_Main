@@ -9,7 +9,7 @@ const Navbar = () => {
   
   const clickHandler = async () => {
     const response = await fetch(
-      '/logout',
+      `${process.env.REACT_APP_API_URL}/logout`,
       {
         method: 'POST'
       }

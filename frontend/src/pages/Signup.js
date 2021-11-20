@@ -35,7 +35,7 @@ const Signup = () => {
       };
 
       const res = await fetch(
-        '/signup',
+        `${process.env.REACT_APP_API_URL}/signup`,
         {
           method: 'POST',
           body: JSON.stringify(user),

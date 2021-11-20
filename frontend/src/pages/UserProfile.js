@@ -7,15 +7,15 @@ const UserProfile = () => {
   
   const { currentUser } = useAuth();
 
-  const [ isLoading, data, getData ] = useFetchGet('/my-errands');
-  const [ isLoading_user, data_user] = useFetchGet(`/user-profile/${currentUser.userId}`);
+  const [ isLoading, data, getData ] = useFetchGet(`${process.env.REACT_APP_API_URL}/my-errands`);
+  const [ isLoading_user, data_user] = useFetchGet(`${process.env.REACT_APP_API_URL}/user-profile/${currentUser.userId}`);
 
   const refreshMain = useCallback(
     () => {
       getData();
     },
     [],
-  );
+  );'';
 
   return(
     <Fragment>

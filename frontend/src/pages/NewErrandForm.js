@@ -18,7 +18,7 @@ const NewErrandForm = () => {
     };
 
     await fetch(
-      '/errands',
+      `${process.env.REACT_APP_API_URL}/errands`,
       {
         method: 'POST',
         body: JSON.stringify(errandData),
