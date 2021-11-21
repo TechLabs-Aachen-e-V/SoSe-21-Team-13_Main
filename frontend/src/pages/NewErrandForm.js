@@ -24,7 +24,8 @@ const NewErrandForm = () => {
         body: JSON.stringify(errandData),
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       }
     );
 

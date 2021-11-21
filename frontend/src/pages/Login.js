@@ -27,7 +27,8 @@ const Login = () => {
           body: JSON.stringify(user),
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          credentials: 'include'
         }
       );
 

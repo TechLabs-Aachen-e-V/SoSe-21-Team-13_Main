@@ -7,7 +7,9 @@ const useFetchGet = (url) => {
   const getData = useCallback(
     () => {
       setIsLoading(true);
-      fetch(url)
+      fetch(url, {
+        credentials: 'include'
+      })
         .then(response => response.json())
         .then(data => {
           setIsLoading(false);
@@ -19,7 +21,10 @@ const useFetchGet = (url) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(url)
+    fetch(url, 
+      {
+        credentials: 'include'
+      })
       .then(response => response.json())
       .then(data => {
         setIsLoading(false);

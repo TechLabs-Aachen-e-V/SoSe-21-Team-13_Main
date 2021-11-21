@@ -22,6 +22,7 @@ const ErrandCard = (props) => {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(testObj)
     });
 
@@ -34,7 +35,8 @@ const ErrandCard = (props) => {
     const errandId = props.id;
 
     await fetch(`${process.env.REACT_APP_API_URL}/errands/${errandId}/book`, {
-      method: 'POST'
+      method: 'POST',
+      credentials: 'include'
     });
 
     history.replace(`/profile/${props.user}`);

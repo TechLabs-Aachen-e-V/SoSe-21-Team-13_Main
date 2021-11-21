@@ -11,7 +11,8 @@ const Navbar = () => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/logout`,
       {
-        method: 'POST'
+        method: 'POST',
+        credentials: 'include',
       }
     );
 
