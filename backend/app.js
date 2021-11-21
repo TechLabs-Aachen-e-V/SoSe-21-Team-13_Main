@@ -20,7 +20,7 @@ const port = process.env.PORT || 5002
 
 app.use(express.json());
 app.use(session({
-  secret: "jvsg87dvskjfgsdhjfkgsdkch78aghfiquwh",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
