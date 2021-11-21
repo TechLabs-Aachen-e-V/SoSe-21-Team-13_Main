@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 // const cors = require('cors')
 const session = require('express-session')
+// const MongoStore = require('connect-mongo')
 const User = require('./models/user')
 const Errand = require('./models/errand');
 const { signupValidation, loginValidation } = require('./validation')
@@ -22,7 +23,16 @@ app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  // store: MongoStore.create({
+  //   mongoUrl: process.env.MONGODB_URL
+  // }),
+  cookie: {
+    sameSite: 'none',
+    secure: true,
+    httpOnly: false
+  },
+  proxy: true
 }));
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
