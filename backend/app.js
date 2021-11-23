@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 // const cors = require('cors')
 const session = require('express-session')
+const sgMail = require('@sendgrid/mail')
 // const MongoStore = require('connect-mongo')
 const User = require('./models/user')
 const Errand = require('./models/errand');
@@ -18,6 +19,8 @@ const port = process.env.PORT || 5002
 // }
 // app.use(cors(corsOptions))
 // app.options('*', cors())
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 app.use(express.json());
 app.use(session({
@@ -164,10 +167,44 @@ app.get('/me', (req, res) => {
 app.post('/errands/:id/book', async (req, res) => {
   try {
     const user = await User.findOne({ _id : req.session.user_id });
-    const errand = await Errand.findOne({ _id: req.params.id });
+    const errand = await Errand.findOne({ _id: req.params.id }).populate("user");
     if (user._id !== errand.user._id && !errand.assignedUser) {
       errand.assignedUser = user._id;
       await errand.save();
+
+      const msgToRequester = {
+        to: user.email,
+        from: 'noreply@gohelpify.tech',
+        subject: 'Errand successfully booked',
+        text: `You have sucessfully booked the errand. ${errand.user.firstName} ${errand.user.lastName} has been notified and will contact you soon.`,
+        html: `<strong>You have sucessfully booked the errand. ${errand.user.firstName} ${errand.user.lastName} has been notified and will contact you soon.</strong>`
+      }
+      sgMail
+        .send(msgToRequester)
+        .then((response) => {
+          console.log(response[0].statusCode)
+          console.log(response[0].headers)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+
+        const msgToPoster = {
+          to: errand.user.email,
+          from: 'noreply@gohelpify.tech',
+          subject: `Your errand has been booked by ${user.firstName} ${user.lastName}`,
+          text: `Your errand has been booked by ${user.firstName} ${user.lastName}, please contact him/her at ${user.email} to provide further details to the errand.`,
+          html: `<strong>Your errand has been booked by ${user.firstName} ${user.lastName}, please contact him/her at ${user.email} to provide further details to the errand.</strong>`
+        }
+        sgMail
+          .send(msgToPoster)
+          .then((response) => {
+            console.log(response[0].statusCode)
+            console.log(response[0].headers)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
     }
 
     res.status(204).end()
