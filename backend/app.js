@@ -28,7 +28,7 @@ app.use(session({
   //   mongoUrl: process.env.MONGODB_URL
   // }),
   cookie: {
-    sameSite: 'none',
+    sameSite: true,
     secure: true,
     httpOnly: false
   },
