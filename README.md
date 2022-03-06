@@ -2,14 +2,6 @@ Helpify - errand running platform
 ==============================
 
 No time for errands? Don't worry, hire someone to run your errands on Helpify.
-
-Project Organization
-------------
-
-    ├── LICENSE
-    ├── README.md          <- The top-level README for developers using this project.
-	├── frontend           <- Frontend of Helpify created with ReactJS.
-	├── backend            <- Backend of Helpify created with NodeJS.
 	
 Main Page             |  User Profile
 :-------------------------:|:-------------------------:
@@ -18,6 +10,14 @@ Main Page             |  User Profile
 Post Detail             |  Add Errand
 :-------------------------:|:-------------------------:
 ![MainPage](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/PostDetail.jpg?raw=true)  |  ![UserProfile](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/AddErrand.jpg?raw=true)
+
+Project Organization
+------------
+
+    ├── LICENSE
+    ├── README.md          <- The top-level README for developers using this project.
+	├── frontend           <- Frontend of Helpify created with ReactJS.
+	├── backend            <- Backend of Helpify created with NodeJS.
 
 Getting started
 ------------
