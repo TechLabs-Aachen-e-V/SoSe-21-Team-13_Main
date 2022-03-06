@@ -11,6 +11,17 @@ Project Organization
 	├── frontend           <- Frontend of Helpify created with ReactJS.
 	├── backend            <- Backend of Helpify created with NodeJS.
 	
+Main Page             |  User Profile
+:-------------------------:|:-------------------------:
+![MainPage](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/MainPage.jpg?raw=true)  |  ![UserProfile](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/UserProfile.jpg?raw=true)
+
+Post Detail             |  Add Errand
+:-------------------------:|:-------------------------:
+![MainPage](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/PostDetail.jpg?raw=true)  |  ![UserProfile](https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main/blob/master/screenshots/AddErrand.jpg?raw=true)
+
+Getting started
+------------
+	
 Instructions for starting the project frontend and backend:
 ```
 git clone https://github.com/TechLabs-Aachen-e-V/SoSe-21-Team-13_Main.git
