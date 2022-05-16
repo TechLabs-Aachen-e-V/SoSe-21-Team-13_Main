@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
-// const cors = require('cors')
+const cors = require('cors')
 const session = require('express-session')
 const sgMail = require('@sendgrid/mail')
 // const MongoStore = require('connect-mongo')
@@ -12,13 +12,14 @@ const bcrypt = require('bcrypt')
 const app = express()
 const port = process.env.PORT || 5002
 
-// // CORS
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200
-// }
-// app.use(cors(corsOptions))
-// app.options('*', cors())
+// CORS
+const corsOptions = {
+  origin: 'https://gohelpify.tech',
+  optionsSuccessStatus: 200,
+  credentials: true
+}
+app.use(cors(corsOptions))
+app.options('*', cors())
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
