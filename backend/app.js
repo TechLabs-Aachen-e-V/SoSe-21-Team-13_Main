@@ -15,6 +15,7 @@ const port = process.env.PORT || 5002
 // CORS
 const corsOptions = {
   origin: 'https://gohelpify.tech',
+  credentials: true,
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions))
