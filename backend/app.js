@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
-// const cors = require('cors')
+const cors = require('cors')
 const session = require('express-session')
 const sgMail = require('@sendgrid/mail')
 // const MongoStore = require('connect-mongo')
